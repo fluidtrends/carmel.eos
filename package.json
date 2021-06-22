@@ -1,0 +1,39 @@
+{
+  "name": "carmel.eos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cli": "ts-node src/cli.ts",
+    "start": "bin/carmel.sh start",
+    "seed": "bin/carmel.sh seed",
+    "build": "bin/carmel.sh compile system",
+    "deploy": "bin/carmel.sh deploy system",
+    "redeploy": "npm run build && npm run deploy",
+    "deploy:prod": "bin/carmel.sh -e prod deploy system",
+    "build:prod": "bin/carmel.sh -e prod compile system",
+    "test": "savor test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idancali/carmel.eos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/idancali/carmel.eos/issues"
+  },
+  "homepage": "https://github.com/idancali/carmel.eos#readme",
+  "dependencies": {
+    "@types/elliptic": "^6.4.12",
+    "@types/node-fetch": "^2.5.10",
+    "eosjs": "^22.0.0",
+    "eosjs-ecc": "^4.0.7",
+    "nanoid": "^3.1.23",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/text-encoding": "0.0.35",
+    "savor": "^1.3.0"
+  }
+}
