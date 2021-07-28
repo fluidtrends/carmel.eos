@@ -1,0 +1,12 @@
+reset_dev_wallet
+start_dev_server
+import_keys
+create_dev_accounts
+
+compile_eostoken_contract
+compile_contract carmeltokens
+compile_contract carmelsystem
+
+deploy_dev_eostoken_contract
+deploy_dev_contract carmeltokens
+deploy_dev_contract carmelsystem

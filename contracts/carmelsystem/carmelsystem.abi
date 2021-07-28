@@ -1,0 +1,410 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT ",
+    "version": "eosio::abi/1.1",
+    "types": [],
+    "structs": [
+        {
+            "name": "assets_table",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "key",
+                    "type": "string"
+                },
+                {
+                    "name": "owner",
+                    "type": "string"
+                },
+                {
+                    "name": "type",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "caccount",
+            "base": "",
+            "fields": [
+                {
+                    "name": "username",
+                    "type": "string"
+                },
+                {
+                    "name": "pub_key",
+                    "type": "string"
+                },
+                {
+                    "name": "did",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "config_table",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "key",
+                    "type": "string"
+                },
+                {
+                    "name": "value",
+                    "type": "string"
+                },
+                {
+                    "name": "type",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "crev4b",
+            "base": "",
+            "fields": []
+        },
+        {
+            "name": "identities_table",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "username",
+                    "type": "string"
+                },
+                {
+                    "name": "pub_key",
+                    "type": "string"
+                },
+                {
+                    "name": "did",
+                    "type": "string"
+                },
+                {
+                    "name": "balance",
+                    "type": "uint64"
+                },
+                {
+                    "name": "rev",
+                    "type": "uint64"
+                }
+            ]
+        },
+        {
+            "name": "newdomain",
+            "base": "",
+            "fields": [
+                {
+                    "name": "username",
+                    "type": "string"
+                },
+                {
+                    "name": "domain",
+                    "type": "string"
+                },
+                {
+                    "name": "sig",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "newelement",
+            "base": "",
+            "fields": [
+                {
+                    "name": "username",
+                    "type": "string"
+                },
+                {
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "name": "path",
+                    "type": "string"
+                },
+                {
+                    "name": "type",
+                    "type": "string"
+                },
+                {
+                    "name": "sig",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "pairs_table",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "token0",
+                    "type": "token"
+                },
+                {
+                    "name": "token1",
+                    "type": "token"
+                },
+                {
+                    "name": "reserve0",
+                    "type": "asset"
+                },
+                {
+                    "name": "reserve1",
+                    "type": "asset"
+                },
+                {
+                    "name": "liquidity_token",
+                    "type": "uint64"
+                },
+                {
+                    "name": "price0_last",
+                    "type": "float64"
+                },
+                {
+                    "name": "price1_last",
+                    "type": "float64"
+                },
+                {
+                    "name": "price0_cumulative_last",
+                    "type": "float64"
+                },
+                {
+                    "name": "price1_cumulative_last",
+                    "type": "float64"
+                },
+                {
+                    "name": "block_time_last",
+                    "type": "time_point_sec"
+                }
+            ]
+        },
+        {
+            "name": "payments_table",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "product_id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "history",
+                    "type": "uint64"
+                },
+                {
+                    "name": "username",
+                    "type": "string"
+                },
+                {
+                    "name": "status",
+                    "type": "string"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "uint64"
+                }
+            ]
+        },
+        {
+            "name": "setconfig",
+            "base": "",
+            "fields": [
+                {
+                    "name": "type",
+                    "type": "string"
+                },
+                {
+                    "name": "key",
+                    "type": "string"
+                },
+                {
+                    "name": "value",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "stakes_table",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "username",
+                    "type": "string"
+                },
+                {
+                    "name": "details",
+                    "type": "string"
+                },
+                {
+                    "name": "amount",
+                    "type": "uint64"
+                },
+                {
+                    "name": "eos_swapped",
+                    "type": "uint64"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "uint64"
+                }
+            ]
+        },
+        {
+            "name": "taccount",
+            "base": "",
+            "fields": [
+                {
+                    "name": "username",
+                    "type": "string"
+                },
+                {
+                    "name": "pub_key",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "token",
+            "base": "",
+            "fields": [
+                {
+                    "name": "contract",
+                    "type": "name"
+                },
+                {
+                    "name": "symbol",
+                    "type": "symbol"
+                }
+            ]
+        },
+        {
+            "name": "uaccount",
+            "base": "",
+            "fields": [
+                {
+                    "name": "username",
+                    "type": "string"
+                },
+                {
+                    "name": "did",
+                    "type": "string"
+                },
+                {
+                    "name": "sig",
+                    "type": "string"
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "name": "caccount",
+            "type": "caccount",
+            "ricardian_contract": "Input parameters:\n\n* `username` (the unique id of the user)\n* `pub_key` (the public key associated with this user)\n* `did` (the Decentralized ID associated with this user account)\n\n### Intent\nINTENT. I {{ signer }} want to create a new Carmel User within the Carmel Ecosystem.\n\n### Term\nTERM. This Contract expires at the conclusion of code execution. The user will then persist on the chain."
+        },
+        {
+            "name": "crev4b",
+            "type": "crev4b",
+            "ricardian_contract": "Input parameters:\n\nnone\n\n### Intent\nINTENT. Depicts the current revision of the contract.\n\n### Term\nTERM. This Contract expires at the conclusion of code execution."
+        },
+        {
+            "name": "newdomain",
+            "type": "newdomain",
+            "ricardian_contract": "Input parameters:\n\n* `username` (a unique id representing the owner)\n* `domain` (the domain to acquire)\n* `sig` (the action signature)\n\n### Intent\nINTENT. As a Carmel {{ user }}, I {{ signer }} want to register a Carmel Domain.\n\n### Term\nTERM. This Contract expires at the conclusion of code execution. This action changes the inventory on the chain."
+        },
+        {
+            "name": "newelement",
+            "type": "newelement",
+            "ricardian_contract": "Input parameters:\n\n* `username` (a unique id representing the owner)\n* `name* `name` (the element name)\n* `path` (the path to the element)\n* `type` (the type of element)\n* `sig` (the action signature)\n\n### Intent\nINTENT. As a Carmel {{ user }}, I {{ signer }} want to publish a Carmel Element.\n\n### Term\nTERM. This Contract expires at the conclusion of code execution. This action changes the inventory on the chain."
+        },
+        {
+            "name": "setconfig",
+            "type": "setconfig",
+            "ricardian_contract": "Input parameters:\n\n* `key` (the configuration key to update)\n* `type` (the type of configuration)\n* `value` (the new configuration value)\n\n### Intent\nINTENT. I {{ admin }} want update the  Carmel Ecosystem configuration.\n\n### Term\nTERM. This Contract expires at the conclusion of code execution. This action changes the Carmel Ecosystem configuration on the chain."
+        },
+        {
+            "name": "taccount",
+            "type": "taccount",
+            "ricardian_contract": "Input parameters:\n\n* `username` (the unique id of the user)\n* `pub_key` (the new public key)\n\n### Intent\nINTENT. I {{ admin }} want transfer a Carmel User to another authority.\n\n### Term\nTERM. This Contract expires at the conclusion of code execution. This action changes the user on the chain."
+        },
+        {
+            "name": "uaccount",
+            "type": "uaccount",
+            "ricardian_contract": "Input parameters:\n\n* `username` (the Carmel user to be updated)\n* `did` (the new Decentralized ID for this user)\n* `sig` (the signature verifying the authority to update the user)\n\n### Intent\nINTENT. As a Carmel {{ user }}, I {{ signer }} want to update this {{ user }} with a new DID.\n\n### Term\nTERM. This Contract expires at the conclusion of code execution. This action changes the user on the chain."
+        }
+    ],
+    "tables": [
+        {
+            "name": "assets",
+            "type": "assets_table",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "config",
+            "type": "config_table",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "identities",
+            "type": "identities_table",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "pairs",
+            "type": "pairs_table",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "payments",
+            "type": "payments_table",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "stakes",
+            "type": "stakes_table",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "ricardian_clauses": [
+        {
+            "id": "Terms and Conditions",
+            "body": "This contract and all its actions is subject to the Carmel Terms and Conditions ratified by the Carmel Community."
+        }
+    ],
+    "variants": []
+}
