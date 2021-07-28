@@ -93,6 +93,9 @@ namespace carmel {
         [[eosio::action]]
         void newdomain(string username, string domain, string sig);
 
+        [[eosio::action]]
+        void newelement(string username, string name, string path, string type, string sig);
+
         [[eosio::on_notify("eosio.token::transfer")]]
         void topupeos(name from, name to, asset quantity, string memo);
 
@@ -179,7 +182,7 @@ namespace carmel {
             uint64_t rev;
             uint64_t primary_key() const { return id; }
             checksum256 secondary_key() const { return sha256(const_cast<char*>(username.c_str()), username.size()); }
-        };        
+        };
 
         //////////////////////////////////////////////////////////////
         ///////////////////         TABLES         ///////////////////
@@ -196,7 +199,7 @@ namespace carmel {
         ///////////////////         HELPERS        ///////////////////
         //////////////////////////////////////////////////////////////
 
-        void newasset(string username, string type, string key, string sig);
+        void newasset(string username, string type, string key, bool free, string sig);
         double asset_price_usd(string type);
         void okusername(string username);
         void topup(name from, name to, asset quantity, string memo);

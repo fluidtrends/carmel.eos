@@ -119,6 +119,32 @@
             ]
         },
         {
+            "name": "newelement",
+            "base": "",
+            "fields": [
+                {
+                    "name": "username",
+                    "type": "string"
+                },
+                {
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "name": "path",
+                    "type": "string"
+                },
+                {
+                    "name": "type",
+                    "type": "string"
+                },
+                {
+                    "name": "sig",
+                    "type": "string"
+                }
+            ]
+        },
+        {
             "name": "pairs_table",
             "base": "",
             "fields": [
@@ -308,6 +334,11 @@
             "name": "newdomain",
             "type": "newdomain",
             "ricardian_contract": "Input parameters:\n\n* `username` (a unique id representing the owner)\n* `domain` (the domain to acquire)\n* `sig` (the action signature)\n\n### Intent\nINTENT. As a Carmel {{ user }}, I {{ signer }} want to register a Carmel Domain.\n\n### Term\nTERM. This Contract expires at the conclusion of code execution. This action changes the inventory on the chain."
+        },
+        {
+            "name": "newelement",
+            "type": "newelement",
+            "ricardian_contract": "Input parameters:\n\n* `username` (a unique id representing the owner)\n* `name* `name` (the element name)\n* `path` (the path to the element)\n* `type` (the type of element)\n* `sig` (the action signature)\n\n### Intent\nINTENT. As a Carmel {{ user }}, I {{ signer }} want to publish a Carmel Element.\n\n### Term\nTERM. This Contract expires at the conclusion of code execution. This action changes the inventory on the chain."
         },
         {
             "name": "setconfig",

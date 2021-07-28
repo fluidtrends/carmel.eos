@@ -25,6 +25,10 @@ export const generateDomain = () => {
     return nanoid()
 }
 
+export const generateElement = () => {
+    return nanoid()
+}
+
 export const signMessage = (msg: string, privateKey: string) => {
     return ecc.sign(msg, privateKey)
 }

@@ -2,6 +2,7 @@ import savor, { Context, Completion } from 'savor'
 import {
   generateUsername,
   generateDomain,
+  generateElement,
   sendTransaction,
   signMessage,
   chain, 
@@ -21,6 +22,7 @@ const NEW_USERNAME = generateUsername()
 const NEW_CONFIG_KEY = generateUsername()
 const NEW_DOMAIN = `${generateDomain()}.carmel`
 const NEW_DOMAIN2 = `${generateDomain()}.carmel`
+const NEW_ELEMENT = `${generateElement()}`
 
 const CHAIN = chain(LOCAL_URL,[TEST_ACTIVE_PRIVATE_KEY, SYS_ACTIVE_PRIVATE_KEY])
 
@@ -228,6 +230,24 @@ savor.
     savor.promiseShouldSucceed(getSystemTableRows(CHAIN, "identities"), done, (result) => {
       const account = result.find((a: any) => a.username ===  NEW_USERNAME)
       context.expect(account.balance).to.equal("20489499916")
+    })
+  }).
+
+  add('should publish an element', (context: Context, done: Completion) => {
+    const sig = signMessage(`2:${NEW_ELEMENT}`, prv_key)
+    savor.promiseShouldSucceed(sendTransaction(CHAIN, TEST_USERNAME, "carmelsystem", "newelement", {
+      username: NEW_USERNAME, name: NEW_ELEMENT, path: "path", type: "packers", sig
+    }), done, (result) => {
+      context.expect(result.processed.receipt.status).to.equal('executed')
+    })
+  }).
+
+  add('should check that the element is published', (context: Context, done: Completion) => {
+    savor.promiseShouldSucceed(getSystemTableRows(CHAIN, "assets"), done, (result) => {
+      const key = `${NEW_ELEMENT}/path`
+      const element = result.find((a: any) => a.type === 'elements/packers' && a.key === key)
+      context.expect(element.key).to.equal(key)
+      context.expect(element.owner).to.equal(NEW_USERNAME)
     })
   }).
 

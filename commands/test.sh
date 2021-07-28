@@ -4,6 +4,6 @@ if [ -z $SUITE ]; then
     SUITE=main
 fi
 
-compile_contract_native carmelsystem
+# compile_contract_native carmelsystem
 
-# . "test/${SUITE}.sh"
+#. "test/${SUITE}.sh"

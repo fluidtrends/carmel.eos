@@ -332,7 +332,7 @@ namespace carmel {
     }
     
     /** @private **/
-    void system::newasset(string username, string type, string key, string sig) {
+    void system::newasset(string username, string type, string key, bool free, string sig) {
          // Make sure this id exists
         identities_index identities(get_self(), get_self().value);
         auto id = get_id(&identities, username.c_str(), true);
@@ -343,18 +343,20 @@ namespace carmel {
         auto asset = assets_idx.find(hash(string(type + CARMEL_SEPARATOR + key)));
         check(asset == assets_idx.end(), "This asset is already owned by someone else");
        
-        // Figure out the CARMEL price
-        double asset_price_usdt = asset_price_usd(type);
-        double carmel_usdt = get_carmel_usdt();
-        uint64_t price = (asset_price_usdt / carmel_usdt) * 10000;
+        if (!free) {
+            // Figure out the CARMEL price
+            double asset_price_usdt = asset_price_usd(type);
+            double carmel_usdt = get_carmel_usdt();
+            uint64_t price = (asset_price_usdt / carmel_usdt) * 10000;
 
-        // Let's check if we have funds for this
-        check(get<1>(id)->balance >= price, string("You need " + to_string(price/10000) + " CARMEL"));
+            // Let's check if we have funds for this
+            check(get<1>(id)->balance >= price, string("You need " + to_string(price/10000) + " CARMEL"));
 
-        (get<0>(id)).modify(get<1>(id), get_self(), [&](auto &item) {
-            // Update the balance
-            item.balance = get<1>(id)->balance - price;
-        });
+            (get<0>(id)).modify(get<1>(id), get_self(), [&](auto &item) {
+                // Update the balance
+                item.balance = get<1>(id)->balance - price;
+            });
+        }
 
          // Let's keep track of this user
         assets.emplace(get_self(), [&](auto &item) {
@@ -487,7 +489,24 @@ namespace carmel {
         check(tld == "carmel" || tld == "web3", "Invalid domain request");
 
         // Attempt to acquire it
-        newasset(username, "domains", domain, sig);
+        newasset(username, "domains", domain, false, sig);
+    }
+
+     /**
+     Publish a new Carmel Element.
+
+     @param username A unique id representing the owner
+     @param name The element name
+     @param path The path to the element
+     @param type The type of element
+     @param sig The action signature
+    */
+    void system::newelement(string username, string name, string path, string type, string sig) {
+        // Make sure we can do this
+        ensure_auth(username, name, sig);
+
+        // Attempt to publish it
+        newasset(username, "elements/" + type, name + "/" + path, true, sig);
     }
 
     [[eosio::on_notify("eosio.token::transfer")]]

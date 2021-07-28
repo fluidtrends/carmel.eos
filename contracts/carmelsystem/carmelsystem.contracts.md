@@ -78,3 +78,19 @@ INTENT. As a Carmel {{ user }}, I {{ signer }} want to register a Carmel Domain.
 
 ### Term
 TERM. This Contract expires at the conclusion of code execution. This action changes the inventory on the chain.
+
+<h1 class="contract"> newelement </h1>
+
+Input parameters:
+
+* `username` (a unique id representing the owner)
+* `name* `name` (the element name)
+* `path` (the path to the element)
+* `type` (the type of element)
+* `sig` (the action signature)
+
+### Intent
+INTENT. As a Carmel {{ user }}, I {{ signer }} want to publish a Carmel Element.
+
+### Term
+TERM. This Contract expires at the conclusion of code execution. This action changes the inventory on the chain.
