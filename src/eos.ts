@@ -33,6 +33,13 @@ export const generateKey = async () =>{
     const privateKey = await ecc.randomKey()
     const publicKey = ecc.privateToPublic(privateKey)
 
+    // var pvt = ecc.PrivateKey('5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3');
+    var pub = ecc.PublicKey.fromString('PUB_K1_8VQTVte4jbjxTTHLSVo9WLb1bnzdoQwsLx7fZyQcF23ge42Hs7')
+    // var pub2 = ecc.PublicKey.fromString('EOS6GyBhfFYdynrD319fhU5ZwPRAUECTYEBhUSFHNHMMCDpaVPMdY')
+
+    console.log(pub.toString())
+    // console.log(pub2.toWif())
+
     return {
         privateKey, publicKey
     }
