@@ -7,7 +7,7 @@ import {
   signMessage,
   chain, 
   getSystemTableRows
-} from '../../src/eos'
+} from '../../src'
 
 const pub_key = "EOS5vDysKHRATDSEcX2ZCWnJavCMJh14LYD8AsxRY3gZ3f5iB9t6c"
 const prv_key = "5KeGzwaxKyG5wXqChDi1fi3i13nmqoB9RsBgaa3kM2Ync1YLQ4A"
@@ -24,7 +24,20 @@ const NEW_DOMAIN = `${generateDomain()}.carmel`
 const NEW_DOMAIN2 = `${generateDomain()}.carmel`
 const NEW_ELEMENT = `${generateElement()}`
 
-const CHAIN = chain(LOCAL_URL,[TEST_ACTIVE_PRIVATE_KEY, SYS_ACTIVE_PRIVATE_KEY])
+const CHAIN = chain({
+  url: LOCAL_URL,
+  keys: {
+    main: {
+      private: prv_key
+    },
+    test: {
+      private: TEST_ACTIVE_PRIVATE_KEY
+    },
+    system: {
+      private: SYS_ACTIVE_PRIVATE_KEY
+    }
+  }
+})
 
 savor.
   add('should create a new ID', (context: Context, done: Completion) => {
@@ -52,7 +65,7 @@ savor.
   }).
 
   add('should not update an ID with an invalid signature', (context: Context, done: Completion) => {
-    const sig = signMessage('1:hi', prv_key)
+    const sig = signMessage('1:hi', CHAIN)
     savor.promiseShouldFail( sendTransaction(CHAIN, TEST_USERNAME, "carmelsystem", "uaccount", {
       username: NEW_USERNAME, did: "hello", sig
     }), done, (error) => {
@@ -61,7 +74,7 @@ savor.
   }).
 
   add('should not update an account with an invalid revision', (context: Context, done: Completion) => {
-    const sig = signMessage('2:hello', prv_key)
+    const sig = signMessage('2:hello', CHAIN)
     savor.promiseShouldFail( sendTransaction(CHAIN, TEST_USERNAME, "carmelsystem", "uaccount", {
       username: NEW_USERNAME, did: "hello", sig
     }), done, (error) => {
@@ -70,7 +83,7 @@ savor.
   }).
 
   add('should update an account', (context: Context, done: Completion) => {
-    const sig = signMessage('1:hello2', prv_key)
+    const sig = signMessage('1:hello2', CHAIN)
     savor.promiseShouldSucceed(sendTransaction(CHAIN, TEST_USERNAME, "carmelsystem", "uaccount", {
       username: NEW_USERNAME, did: "hello2", sig
     }), done, (result) => {
@@ -161,7 +174,7 @@ savor.
   }).
 
   add('should not register an invalid domain', (context: Context, done: Completion) => {
-    const sig = signMessage(`1:test`, prv_key)
+    const sig = signMessage(`1:test`, CHAIN)
     savor.promiseShouldFail(sendTransaction(CHAIN, TEST_USERNAME, "carmelsystem", "newdomain", {
       username: NEW_USERNAME, domain: "test", sig
     }), done, (error) => {
@@ -178,7 +191,7 @@ savor.
   }).
 
   add('should register an available domain', (context: Context, done: Completion) => {
-    const sig = signMessage(`2:${NEW_DOMAIN}`, prv_key)
+    const sig = signMessage(`2:${NEW_DOMAIN}`, CHAIN)
     savor.promiseShouldSucceed(sendTransaction(CHAIN, TEST_USERNAME, "carmelsystem", "newdomain", {
       username: NEW_USERNAME, domain: NEW_DOMAIN, sig
     }), done, (result) => {
@@ -210,7 +223,7 @@ savor.
   }).
 
   add('should register another available domain', (context: Context, done: Completion) => {
-    const sig = signMessage(`2:${NEW_DOMAIN2}`, prv_key)
+    const sig = signMessage(`2:${NEW_DOMAIN2}`, CHAIN)
     savor.promiseShouldSucceed(sendTransaction(CHAIN, TEST_USERNAME, "carmelsystem", "newdomain", {
       username: NEW_USERNAME, domain: NEW_DOMAIN2, sig
     }), done, (result) => {
@@ -234,7 +247,7 @@ savor.
   }).
 
   add('should publish an element', (context: Context, done: Completion) => {
-    const sig = signMessage(`2:${NEW_ELEMENT}`, prv_key)
+    const sig = signMessage(`2:${NEW_ELEMENT}`, CHAIN)
     savor.promiseShouldSucceed(sendTransaction(CHAIN, TEST_USERNAME, "carmelsystem", "newelement", {
       username: NEW_USERNAME, name: NEW_ELEMENT, path: "path", type: "packers", sig
     }), done, (result) => {
