@@ -6,11 +6,18 @@ const { Api, JsonRpc, RpcError } = require('eosjs')
 import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig'
 import fetch from 'node-fetch'
 
+const DEFAULT_URL = "https://api.eosn.io"
+
 export const chain = ({ keys, url }: any) => {
     const signatureProvider = new JsSignatureProvider(Object.keys(keys).map((k: string) => keys[k].private))
     const rpc = new JsonRpc(url, { fetch })
     const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() })
     return { api, rpc, keys }    
+}
+
+export const anonChain = () => {
+  const rpc = new JsonRpc(DEFAULT_URL, { fetch })
+  return { rpc }    
 }
 
 export const generateUsername = () => {
