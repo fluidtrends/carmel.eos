@@ -2,7 +2,7 @@
   "name": "@carmel/eos",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
     "cli": "ts-node src/cli.ts",
     "start": "bin/carmel.sh start",
@@ -32,11 +32,17 @@
   "dependencies": {
     "@types/elliptic": "^6.4.12",
     "@types/node-fetch": "^2.5.10",
+    "bip32": "^2.0.6",
+    "bip38": "^3.1.1",
+    "bip39": "^3.0.4",
+    "bs58": "^4.0.1",
     "eosio-signing-request": "^2.2.2",
     "eosjs": "^22.0.0",
     "eosjs-ecc": "^4.0.7",
     "nanoid": "^3.1.23",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "randombytes": "^2.1.0",
+    "react-hooks-worker": "^1.0.0"
   },
   "devDependencies": {
     "@types/text-encoding": "0.0.35",
