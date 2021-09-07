@@ -75,13 +75,3 @@ export const decryptSignature = (data: any) => {
         }
     }
 }
-
-export const createId = ({ credentials }: any) => {
-    console.log("createId", credentials)
-
-    const identity = generateIdentity(credentials)
-
-    console.log("createId", identity)
-
-    return identity
-}
