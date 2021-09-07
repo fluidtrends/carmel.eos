@@ -46,15 +46,6 @@ export const sha256 = async (message: string) => {
     return require("crypto").createHash("sha256").update(message).digest("hex")
 }
 
-export const generateKey = async () =>{
-    const privateKey = await ecc.randomKey()
-    const publicKey = ecc.privateToPublic(privateKey)
-
-    return {
-        privateKey, publicKey
-    }
-}
-
 export const getTableRows = async (c: any, code: string, scope: string, table: string, limit: number = 100, index: any = false) => {
     try {
         const result = await c.rpc.get_table_rows(Object.assign({
@@ -164,8 +155,6 @@ export const getAssets = async (c: any) => get(c, 'assets')
 export const getConfig = async (c: any) => get(c, 'config')
 
 export const geTicker = async (c: any) => ticker(c)
-
-export const newKey = async () => generateKey()
 
 export const topup = async (c: any, amount: string, to: string, type: string = 'eos', key: string = 'main') => {  
     if (type.toLowerCase() === 'eos') {
