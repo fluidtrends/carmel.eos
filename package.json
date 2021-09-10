@@ -1,11 +1,12 @@
 {
   "name": "@carmel/eos",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "",
   "main": "src/index.ts",
   "scripts": {
     "cli": "ts-node src/cli.ts",
     "start": "bin/carmel.sh start",
+    "script:check": "ts-node scripts/check.ts",
     "seed": "bin/carmel.sh seed",
     "build": "bin/carmel.sh compile system",
     "deploy": "bin/carmel.sh deploy system",

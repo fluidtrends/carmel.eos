@@ -2,16 +2,18 @@ const ecc = require('eosjs-ecc')
 import { customAlphabet } from 'nanoid'
 const nanoid = customAlphabet('2345abcdefghijklmnopqrstuvwxyz', 12)
 import { TextEncoder, TextDecoder } from 'util'
-const { Api, JsonRpc, RpcError } = require('eosjs')
+// const { Api, JsonRpc, RpcError } = require('eosjs')
+import { Api, JsonRpc, RpcError } from 'eosjs'
 import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig'
 import fetch from 'node-fetch'
 
-const DEFAULT_URL = "https://api.eosn.io"
+export const DEFAULT_URL = "https://eos.greymass.com"
 
 export const chain = ({ keys, url }: any) => {
+    const textDecoder = new globalThis.TextDecoder()
     const signatureProvider = new JsSignatureProvider(Object.keys(keys).map((k: string) => keys[k].private))
     const rpc = new JsonRpc(url, { fetch })
-    const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() })
+    const api = new Api({ rpc, signatureProvider, textDecoder, textEncoder: new TextEncoder() })
     return { api, rpc, keys }    
 }
 
@@ -173,4 +175,55 @@ export const registerDomain = async (c: any, username: string, domain: string, k
     const result = await system(c, "newdomain", { username, domain, sig }, key)
 
     return result
+}
+
+export const createAccount = async (c: any, username: string, publicKey: string, did: string) => {
+  // const id = await getId(c, username)
+  // const sig = signMessage(`${parseInt(id.rev) + 1}:${domain}`, c.keys[key].private)
+  // const result = await system(c, "newdomain", { username, domain, sig }, key)
+  const result = await system (c, "caccount", {
+    username, pub_key: publicKey, did
+  })
+  // sendTransaction(c, c.keys[key].id, "carmelsystem", action, data)
+
+
+  // sendTransaction(CHAIN, TEST_USERNAME, "carmelsystem", "caccount", {
+  //   username: NEW_USERNAME, pub_key, did: "hello"
+  // }), done, (result) => {
+
+  return result
+}
+
+export const getAccountsFromPrivateKey = async (data: any) => {
+  const signatureProvider = new JsSignatureProvider([data.privateKey])
+  const getAvailableKeys = await signatureProvider.getAvailableKeys()
+  const publicKey = getAvailableKeys[0]
+
+  try {
+    const rpc = new JsonRpc(DEFAULT_URL, { fetch })
+    let result = await rpc.history_get_key_accounts(publicKey)
+
+    if (!result || !result.account_names) {
+        throw new Error('Invalid private key')
+    }
+
+    const { account_names } = result
+
+    let balances: any = await Promise.all(account_names.map((a: string) => Promise.all([rpc.get_currency_balance("eosio.token", a), rpc.get_currency_balance("carmeltokens", a)])))
+    balances = balances.map((b: any) => b.map((a: any) => a[0]))
+
+    const accounts = account_names.map((id: string, i: number) => {
+      const eos = balances[i][0] ? parseFloat(balances[i][0].split()[0]) : -1
+      const carmel = balances[i][1] ? parseFloat(balances[i][1].split()[0]) : -1
+
+      return { id, eos, carmel }
+    })
+
+    return {
+        publicKey,
+        accounts
+    }
+  } catch (e) {
+    console.log(e)
+  }
 }
