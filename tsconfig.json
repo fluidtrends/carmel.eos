@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "target": "es5",                         
+      "target": "es2017",                         
       "module": "commonjs",                     
       "strict": true,             
       "jsx": "preserve",     
@@ -17,9 +17,7 @@
       "outDir": "./lib"
     },
     "include": [
-      "./lib/**/*",
-      "./src/**/*",
-      "tsconfig.json"
+      "src/**/*"
     ],
     "typedocOptions": {
       "mode": "file",
