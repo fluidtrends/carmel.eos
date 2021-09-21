@@ -69,9 +69,9 @@ export const decryptSignature = (data: any) => {
         const privateKey = wif.encode(128, decrypted.privateKey, decrypted.compressed)
 
         return Object.assign({}, data, { privateKey })
-    } catch (e) {
+    } catch (error) {
         return {
-            error: e.message
+            error
         }
     }
 }
