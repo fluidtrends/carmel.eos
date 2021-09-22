@@ -5,7 +5,7 @@ export declare const chain: ({ keys, url }: any) => {
     rpc: JsonRpc;
     keys: any;
 };
-export declare const anonChain: () => {
+export declare const anonChain: ({ url }: any) => {
     rpc: JsonRpc;
 };
 export declare const generateUsername: () => string;

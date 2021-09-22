@@ -12,13 +12,13 @@ export const DEFAULT_URL = "https://eos.greymass.com"
 export const chain = ({ keys, url }: any) => {
     const textDecoder = new globalThis.TextDecoder()
     const signatureProvider = new JsSignatureProvider(Object.keys(keys).map((k: string) => keys[k].private))
-    const rpc = new JsonRpc(url, { fetch })
+    const rpc = new JsonRpc(url || DEFAULT_URL, { fetch })
     const api = new Api({ rpc, signatureProvider, textDecoder, textEncoder: new TextEncoder() })
     return { api, rpc, keys }    
 }
 
-export const anonChain = () => {
-  const rpc = new JsonRpc(DEFAULT_URL, { fetch })
+export const anonChain = ({ url }: any ) => {
+  const rpc = new JsonRpc(url || DEFAULT_URL, { fetch })
   return { rpc }    
 }
 
@@ -94,6 +94,7 @@ export const getSystemTableRows = async (c: any, table: string) => {
 
 export const getId = async (c: any, username: string) => {
     const hash = await sha256(username)
+    
     const result = await getTableRows(c, "carmelsystem", "carmelsystem", "identities", 10, {
       lower_bound: hash,
       upper_bound: hash,
@@ -101,7 +102,7 @@ export const getId = async (c: any, username: string) => {
       encode_type: 'hex',
       key_type: 'sha256'
     })
-  
+ 
     if (!result || result.length < 1) return
      
     return result[0]
