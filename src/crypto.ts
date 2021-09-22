@@ -49,9 +49,6 @@ export const generateSignature = (privateKey: any, password: any) => {
     return encrypt(decoded.privateKey, decoded.compressed, password)
 }
 
-export const doWork = () => {
-}
-
 export const generateIdentity = ({ username, password }: any) => {
     const mnemonic = generateMnemonic()
     const wallet = generateWallet(mnemonic)

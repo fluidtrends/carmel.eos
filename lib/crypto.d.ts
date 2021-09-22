@@ -9,7 +9,6 @@ export declare const generateWalletKey: (wallet: any, index: number, path?: stri
     publicKey: any;
 };
 export declare const generateSignature: (privateKey: any, password: any) => any;
-export declare const doWork: () => void;
 export declare const generateIdentity: ({ username, password }: any) => {
     privateKey: any;
     publicKey: any;

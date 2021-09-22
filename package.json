@@ -4,7 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-    "scripts": {
+  "scripts": {
     "cli": "ts-node src/cli.ts",
     "compile": "rm -rf lib && ./node_modules/.bin/tsc",
     "start": "bin/carmel.sh start",
